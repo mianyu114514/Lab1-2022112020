@@ -11,6 +11,7 @@ import java.io.File;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 //第一次修改提交OVO
+//B2修改ciallo
 public class TextToGraph extends JFrame {
 
     //protected static Graph graph;
