@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
@@ -64,7 +62,8 @@ public class calcShortestPathTest extends TestCase {
       Map<List<String>, Integer> shortestPath = TextToGraph.calcShortestPath(word1, word2,
           textToGraph);
       if (!shortestPath.isEmpty()) {
-        result = TextToGraph.formatShortestPath(textToGraph, shortestPath, word1, word2);
+        result = TextToGraph.formatShortestPath(textToGraph, shortestPath, word1,
+            word2);//白盒可以调用输出函数
       } else {
         result = TextToGraph.formatShortestPath(textToGraph, null, word1, word2);
       }
@@ -107,38 +106,9 @@ public class calcShortestPathTest extends TestCase {
     String result = calcShortestPath(textToGraph, word1, word2);
 
     // Define expected output strings
-    Set<String> expectedOutputs = new HashSet<>();
-    expectedOutputs.add("h" + "→" + "g" + "→" + "e\n" + "the shortest path:2;");
-    expectedOutputs.add("h" + "→" + "m" + "→" + "e\n" + "the shortest path:2;");
-
-    // Split the result into sections based on semicolons
-    String cleanedResult = result
-        .replaceAll("[\\$,]", "");  // 移除方括号和逗号
-    // Use a set to track encountered sections
-    String[] resultSections = cleanedResult.split("(?<=;)");
-    Set<String> encounteredSections = new HashSet<>();
-
-    boolean allUnique = true;
-    boolean foundMatch = false;
-    for (String section : resultSections) {
-      String trimmed = section.trim();
-      if (!trimmed.isEmpty()) {
-        encounteredSections.add(trimmed);
-      }
-    }
-    /*for (String section : resultSections) {
-      if (encounteredSections.contains(section)) {
-        allUnique = false;
-      }
-      encounteredSections.add(section);
-      if (expectedOutputs.contains(section)) {
-        foundMatch = true;
-      }
-    }*/
-    //assertTrue(encounteredSections.size() - 1 == expectedOutputs.size());
-    assertEquals(expectedOutputs, encounteredSections);
-    //assertTrue(allUnique);
-    //assertTrue(foundMatch);
+    String expectedOutput = "h→g→e\nthe shortest path:2;\n" +
+        "h→m→e\nthe shortest path:2;\n";
+    assertEquals(expectedOutput, result);
   }
 
   @Test
