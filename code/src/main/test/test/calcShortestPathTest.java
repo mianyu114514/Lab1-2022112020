@@ -10,6 +10,7 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+//merge
 public class calcShortestPathTest extends TestCase {
 
   private final static HashMap<String, Map<String, Integer>> textToGraph = new HashMap<>();
